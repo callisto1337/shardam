@@ -1,0 +1,531 @@
+{% load staticfiles %}
+
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1.0, width=device-width">
+    <title>Ресторан Шардам</title>
+
+    <link rel="stylesheet"
+          href="https://necolas.github.io/normalize.css/8.0.0/normalize.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.10.0/css/lightbox.min.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+<header class="header">
+    <div class="header-container">
+        <a href="#main" class="header-link anchor-link">
+            <img class="header-logo " src="{% static 'img/logo.png' %}"
+                 alt="Логотип Шардам">
+        </a>
+        <div class="section-1__nav">
+            <a href="#corporate" class="section-1__nav-item anchor-link">Корпоративы</a>
+            <a href="#wedding"
+               class="section-1__nav-item anchor-link">Свадьбы</a>
+            <a href="#childrens-menu" class="section-1__nav-item anchor-link">Детское
+                кафе</a>
+            <a href="#contacts" class="section-1__nav-item anchor-link">Контакты</a>
+        </div>
+        <div class="section-1__contacts">
+            {% for item in addresses %}
+                <div class="section-1__contacts-item">
+                    <a href="tel:{{ item.phone }}"
+                       class="section-1__contacts-phone">
+                        {{ item.phone }}
+                    </a>
+                    <span class="section-1__contacts-link show-popup">
+                    {{ item.title }}
+                </span>
+                </div>
+            {% endfor %}
+            <div class="section-1__contacts-item">
+                <div class="section-1__contacts-button show-popup">
+                    <img class="section-1__contacts-icon"
+                         src="{% static 'img/mail.svg' %}"
+                         alt="Оставить заявку">
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="section section-1" id="main">
+    <div class="container">
+        <div class="section-1__content">
+            <h1 class="title">Ресторан Шардам</h1>
+            <p class="section-1__description">
+                Сеть кафе Шардам — это пространство креативного творческого
+                релакса для всей семьи.<br>
+                В наших кафе родители могут насладиться атмосферой уюта под
+                звуки живой музыки именитых <br>музыкантов города, а дети могут
+                активно и увлекательно провести время со своими сверстниками в
+                <br>детской зоне!
+        </div>
+        <a class="section-1__footer anchor-link" href="#corporate">
+            <img class="section-1__mouse" src="{% static 'img/mouse.svg' %}"
+                 alt="">
+            <p class="section-1__footer-text">
+                Подробнее
+            </p>
+        </a>
+    </div>
+</div>
+
+<div class="section section_form section-2" id="corporate">
+    <div class="section-2__content">
+        <div class="container section-2__container">
+            <div class="section-2__wrapper">
+                <h2 class="title">Корпоративные <br>мероприятия</h2>
+                <div class="section-2__description">
+                    Cеть кафе Шардам — это пространство креативного<br>
+                    творческого релакса для всей семьи.
+                    <div class="section-2__icons">
+                        {% for item in social %}
+                            <a href="{{ item.url }}"
+                               class="section-2__icons-item" target="_blank">
+                                <img src="media/{{ item.icon }}" alt="">
+                            </a>
+                        {% endfor %}
+                    </div>
+                    <input type="submit" class="section-2__form-button show-popup show-sm" value="Забронировать">
+                </div>
+            </div>
+            <form action="/reservations/" class="section-2__form form-mail send-form">
+                <label>
+                    <span class="section-2__form-title">Заказ столиков</span>
+                    <input class="section-2__form-input phone-mask"
+                           autocomplete="off" type="text" name="phone"
+                           placeholder="+7 (&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)">
+                    <input type="hidden" name="name" value="">
+                    <input type="hidden" name="guests" value="">
+                    <input type="hidden" name="address" value="">
+                </label>
+                <input type="submit" class="section-2__form-button"
+                       value="Забронировать">
+            </form>
+        </div>
+    </div>
+</div>
+<div class="section section_menu section-3">
+    <img src="./img/plate-1.jpg" alt=""
+         class="section-3__plate section-3__plate_1">
+    <img src="./img/plate-2.jpg" alt=""
+         class="section-3__plate section-3__plate_2">
+    <div class="container">
+        <div class="section-3__nav">
+            <span class="section-3__nav-item section-3__nav-item_active">
+                Банкетное меню
+            </span>
+            <span class="section-3__nav-item">Технические характеристики</span>
+        </div>
+        <div class="section-3__block section-3__block_active">
+            <div class="section-3__categories">
+                {% for menu in corporate_parties.menu_list %}
+                    <span class="section-3__categories-item {% if forloop.counter == 1 %}active{% endif %} {% if menu.special %}top{% endif %}">
+                        {{ menu.title }}
+                    </span>
+                {% endfor %}
+            </div>
+            {% for menu in corporate_parties.menu_list %}
+                <div class="section-3__menu {% if forloop.counter == 1 %}active{% endif %}">
+                    <div class="section-3__menu-col">
+                        {% include "landing/menu_item.html" with menu_items=menu.items.all only %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="section-3__block">
+            <div class="section-3__block-title">
+                Оборудование
+            </div>
+            <div class="section-3__block-row">
+                <div class="section-3__block-col">
+                    <div class="section__block-item">Проектор</div>
+                    <div class="section__block-item">Экран</div>
+                </div>
+                <div class="section-3__block-col">
+                    <div class="section__block-item">Канчелярские принадлежности</div>
+                    <div class="section__block-item">Акустическая система</div>
+                </div>
+                <div class="section-3__block-col">
+                    <div class="section__block-item">Флипчарт</div>
+                </div>
+            </div>
+            <div class="section-3__block-title">
+                Другие возможности
+            </div>
+            <div class="section-3__block-row">
+                <div class="section-3__block-col">
+                    <div class="section__block-item">Проектор</div>
+                    <div class="section__block-item">Экран</div>
+                </div>
+                <div class="section-3__block-col">
+                    <div class="section__block-item">Канчелярские принадлежности</div>
+                    <div class="section__block-item">Акустическая система</div>
+                </div>
+                <div class="section-3__block-col">
+                    <div class="section__block-item">Флипчарт</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="carousel">
+    <div class="owl-carousel">
+        {% for item in corporate_parties.images %}
+            <a href="{{ item.image.url }}"
+               class="carousel__item"
+               data-lightbox="image-1"
+               data-title="{{ item.title }}">
+                <img src="{{ item.image.url }}" alt="{{ item.title }}">
+            </a>
+        {% endfor %}
+    </div>
+    <span class="carousel__link show-popup">Заказать звонок</span>
+</div>
+
+
+<div class="section section_form section-2 section-2_2" id="wedding">
+    <div class="section-2__content">
+        <div class="container section-2__container">
+            <div class="section-2__wrapper">
+                <h2 class="title">Свадьбы</h2>
+                <div class="section-2__description">
+                    Шардам не только площадка для детского <br>
+                    творчества, но и прекрасное место для проведения <br>
+                    досуга для взрослых, романтических свиданий, <br>
+                    деловых обедов, корпоративов, праздников, дней <br>
+                    рождений в уникальном месте, в парке в самом <br>центре
+                    Москвы.
+                    <div class="section-2__icons">
+                        {% for item in social %}
+                            <a href="{{ item.url }}"
+                               class="section-2__icons-item" target="_blank">
+                                <img src="media/{{ item.icon }}" alt="">
+                            </a>
+                        {% endfor %}
+                    </div>
+                    <input type="submit" class="section-2__form-button section-2__form-button_2 show-popup show-sm" value="Забронировать">
+                </div>
+            </div>
+            <form action="/mail" class="section-2__form form-mail">
+                <label>
+                    <span class="section-2__form-title">Заказ столиков</span>
+                    <input class="section-2__form-input phone-mask"
+                           autocomplete="off" name="name" type="text"
+                           placeholder="+7 (&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)">
+                </label>
+                <input type="submit"
+                       class="section-2__form-button section-2__form-button_2 send-form"
+                       value="Забронировать">
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="section section_menu section-3 section-3_2">
+    <img src="./img/rings.jpg" alt=""
+         class="section-3__plate section-3__plate_1">
+    <img src="./img/flowers.jpg" alt=""
+         class="section-3__plate section-3__plate_2">
+    <div class="container">
+        <div class="section-3__nav">
+            <span class="section-3__nav-item section-3__nav-item_active">
+                Банкетное меню
+            </span>
+            <span class="section-3__nav-item">Технические характеристики</span>
+        </div>
+        <div class="section-3__block section-3__block_active">
+            <div class="section-3__categories">
+                {% for menu in weddings.menu_list %}
+                    <span class="section-3__categories-item {% if forloop.counter == 1 %}active{% endif %} {% if menu.special %}top{% endif %}">
+                        {{ menu.title }}
+                    </span>
+                {% endfor %}
+            </div>
+            {% for menu in weddings.menu_list %}
+                <div class="section-3__menu {% if forloop.counter == 1 %}active{% endif %}">
+                    <div class="section-3__menu-col">
+                        {% include "landing/menu_item.html" with menu_items=menu.items.all only %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="section-3__block">
+            <div class="section-3__block-title">
+                Оборудование
+            </div>
+            <div class="section-3__block-row">
+                <div class="section-3__block-col">
+                    <div class="section__block-item">Проектор</div>
+                    <div class="section__block-item">Экран</div>
+                </div>
+                <div class="section-3__block-col">
+                    <div class="section__block-item">Канчелярские принадлежности</div>
+                    <div class="section__block-item">Акустическая система</div>
+                </div>
+                <div class="section-3__block-col">
+                    <div class="section__block-item">Флипчарт</div>
+                </div>
+            </div>
+            <div class="section-3__block-title">
+                Другие возможности
+            </div>
+            <div class="section-3__block-row">
+                <div class="section-3__block-col">
+                    <div class="section__block-item">Проектор</div>
+                    <div class="section__block-item">Экран</div>
+                </div>
+                <div class="section-3__block-col">
+                    <div class="section__block-item">Канчелярские принадлежности</div>
+                    <div class="section__block-item">Акустическая система</div>
+                </div>
+                <div class="section-3__block-col">
+                    <div class="section__block-item">Флипчарт</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="carousel">
+    <div class="owl-carousel">
+        {% for item in weddings.images %}
+            <a href="{{ item.image.url }}"
+               class="carousel__item"
+               data-lightbox="image-2"
+               data-title="{{ item.title }}">
+                <img src="{{ item.image.url }}" alt="">
+            </a>
+        {% endfor %}
+    </div>
+    <span class="carousel__link show-popup">Заказать звонок</span>
+</div>
+
+<div class="section section_form section-2 section-2_3" id="childrens-menu">
+    <div class="section-2__content">
+        <div class="container section-2__container">
+            <div class="section-2__wrapper">
+                <h2 class="title">Детское кафе</h2>
+                <div class="section-2__description">
+                    Когда ты ребенок и у тебя долгожданный день рождения,
+                    хочется, <br>
+                    чтобы этот день прошел как-то особенно, ведь больше он
+                    никогда <br>
+                    не повторится!
+                </div>
+                <div class="section-2__description">
+                    Но и когда ты уже взрослый, а твой ребенок отмечает первый
+                    в <br>
+                    своей жизни юбилей, тоже хочется, чтобы этот день рождения,
+                    как <br>
+                    минимум, вошел в историю.
+                    <div class="section-2__icons">
+                        {% for item in social %}
+                            <a href="{{ item.url }}"
+                               class="section-2__icons-item" target="_blank">
+                                <img src="media/{{ item.icon }}" alt="">
+                            </a>
+                        {% endfor %}
+                    </div>
+                    <input type="submit" class="section-2__form-button section-2__form-button_3 show-popup show-sm" value="Забронировать">
+                </div>
+            </div>
+            <form action="/mail" class="section-2__form form-mail">
+                <label>
+                    <span class="section-2__form-title">Заказ столиков</span>
+                    <input class="section-2__form-input phone-mask"
+                           autocomplete="off" name="name" type="text"
+                           placeholder="+7 (&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)">
+                </label>
+                <input type="submit"
+                       class="section-2__form-button section-2__form-button_3 send-form"
+                       value="Забронировать">
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="section section_menu section-3 section-3_3">
+    <!--<img src="./img/ball.jpg" alt="" class="section-3__plate section-3__plate_1">-->
+    <img src="./img/cake.jpg" alt=""
+         class="section-3__plate section-3__plate_2">
+    <div class="container">
+        <div class="section-3__nav">
+            <span class="section-3__nav-item section-3__nav-item_active">
+                Детское меню
+            </span>
+            <span class="section-3__nav-item">Дополнительные услуги</span>
+        </div>
+        <div class="section-3__block section-3__block_active">
+            <div class="section-3__categories">
+                {% for menu in children_event.menu_list %}
+                    <span class="section-3__categories-item {% if forloop.counter == 1 %}active{% endif %} {% if menu.special %}top{% endif %}">
+                        {{ menu.title }}
+                    </span>
+                {% endfor %}
+            </div>
+            {% for menu in children_event.menu_list %}
+                <div class="section-3__menu {% if forloop.counter == 1 %}active{% endif %}">
+                    <div class="section-3__menu-col">
+                        {% include "landing/menu_item.html" with menu_items=menu.items.all only %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="section-3__block">
+            <div class="section-3__block-title">
+                Оборудование
+            </div>
+            <div class="section-3__block-row">
+                <div class="section-3__block-col">
+                    <div class="section__block-item">Проектор</div>
+                    <div class="section__block-item">Экран</div>
+                </div>
+                <div class="section-3__block-col">
+                    <div class="section__block-item">Канчелярские принадлежности</div>
+                    <div class="section__block-item">Акустическая система</div>
+                </div>
+                <div class="section-3__block-col">
+                    <div class="section__block-item">Флипчарт</div>
+                </div>
+            </div>
+            <div class="section-3__block-title">
+                Другие возможности
+            </div>
+            <div class="section-3__block-row">
+                <div class="section-3__block-col">
+                    <div class="section__block-item">Проектор</div>
+                    <div class="section__block-item">Экран</div>
+                </div>
+                <div class="section-3__block-col">
+                    <div class="section__block-item">Канчелярские принадлежности</div>
+                    <div class="section__block-item">Акустическая система</div>
+                </div>
+                <div class="section-3__block-col">
+                    <div class="section__block-item">Флипчарт</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="carousel">
+    <div class="owl-carousel">
+        {% for item in children_event.images %}
+            <a href="{{ item.image.url }}"
+               class="carousel__item"
+               data-lightbox="image-3"
+               data-title="{{ item.title }}">
+                <img src="{{ item.image.url }}" alt="">
+            </a>
+        {% endfor %}
+    </div>
+    <span class="carousel__link show-popup">Заказать звонок</span>
+</div>
+
+<footer class="footer" id="contacts">
+    <iframe class="footer__map"
+            src="https://yandex.ru/map-widget/v1/?um=constructor%3Aaafac18191165e7b0a74890abe1735106fbdb140f7ff2414ef763ce0f64298bf&amp;source=constructor"></iframe>
+    <div class="container footer__container">
+        {% for item in addresses %}
+            <div class="footer__col">
+                <img src="media/{{ item.icon }}" alt="{{ item.title }}">
+                <div class="footer__wrapper">
+                    <div class="footer__title">
+                        {{ item.title }}
+                    </div>
+                    <div class="footer__address">
+                        {{ item.address }}
+                    </div>
+                    <div class="footer__metro">
+                        м.
+                        {{ item.metro }}
+                    </div>
+                    <a class="footer__phone" href="tel:{{ item.phone }}">
+                        {{ item.phone }}
+                    </a>
+                    <a class="footer__mail" href="mailto:{{ item.email }}">
+                        {{ item.email }}
+                    </a>
+                    <div class="footer__time">
+                        {{ item.time }}
+                    </div>
+                    <div class="footer__time">
+                        {{ item.time_weekend }}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</footer>
+
+<div class="form">
+    <div class="container">
+        <h2 class="title">Ждем Вас в гости</h2>
+        <form action="/mail" class="form__wrapper form-mail">
+            <input type="text" class="form__input" autocomplete="off"
+                   placeholder="Имя" name="name">
+            <input type="text" class="form__input phone-mask"
+                   autocomplete="off" name="phone"
+                   placeholder="+7 (&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)">
+            <input type="submit" class="form__button send-form"
+                   value="Забронировать">
+        </form>
+    </div>
+</div>
+
+<div class="popup">
+    <div class="popup__bg close-popup"></div>
+    <div class="popup__content">
+        <div class="popup__title">Заказ столиков</div>
+        <form action="/reservations/" class="popup__form send-form">
+            <div class="popup__wrapper">
+                <input type="text" class="popup__input" autocomplete="off"
+                       name="name"
+                       placeholder="Имя">
+                <input type="text" class="popup__input phone-mask"
+                       autocomplete="off"
+                       name="phone"
+                       placeholder="+7 (&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)">
+            </div>
+            <div class="popup__wrapper">
+                <input type="text" class="popup__input"
+                       autocomplete="off"
+                       name="guests"
+                       placeholder="Кол. гостей">
+            </div>
+            <div class="popup__wrapper">
+                {% for item in addresses %}
+                    <label class="popup__radio">
+                        <input class="popup__radio-input" type="radio"
+                               name="address" checked value="{{ item.id }}">
+                        <span class="popup__radio-icon"></span>
+                        {{ item.title }}
+                    </label>
+                {% endfor %}
+            </div>
+            <div class="form__error">Необходимо заполнить все поля!</div>
+            <input type="submit" class="popup__button"
+                   value="Забронировать">
+        </form>
+        <img class="popup__close close-popup"
+             src="{% static 'img/icon-close.svg' %}" alt="">
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+<script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.10.0/js/lightbox.min.js"></script>
+<script src="{% static 'js/script.js' %}"></script>
+</body>
+</html>

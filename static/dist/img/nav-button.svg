@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="237.656" height="63" viewBox="0 0 237.656 63">
+<defs>
+    <style>
+      .cls-1 {
+        fill: #fffefc;
+        stroke: #dfc78a;
+        stroke-linejoin: round;
+        stroke-width: 1px;
+        fill-rule: evenodd;
+      }
+    </style>
+  </defs>
+  <path id="Shape_27_копия_5_copy_5" data-name="Shape 27 копия 5 copy 5" class="cls-1" d="M37.006,4225.44c4.983-1.6,11.742-6.13,13.246-13.43h210.23c1.636,6.99,8.34,11.32,13.19,12.85v34.61c-2.781.87-7.661,2.64-9.61,5.14a20.443,20.443,0,0,0-3.922,9.39H49.885c-1.38-7.28-8.011-11.94-12.879-13.73v-34.83Z" transform="translate(-36.5 -4211.5)"/>
+</svg>

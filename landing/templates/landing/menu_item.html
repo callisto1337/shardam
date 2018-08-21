@@ -1,0 +1,22 @@
+{% load listutils %}
+
+{% for row in menu_items|columns:2 %}
+    {% for item in row %}
+        <div class="section-3__menu-item">
+            <div class="section-3__item-wrapper">
+                <div class="section-3__menu-name">
+                    {{ item.title }}
+                </div>
+                <div class="section-3__menu-composition">
+                    {{ item.composition }}
+                </div>
+            </div>
+            <div class="section-3__menu-weight">
+                {{ item.weight }} г.
+            </div>
+            <div class="section-3__menu-price">
+                {{ item.price }} ₽
+            </div>
+        </div>
+    {% endfor %}
+{% endfor %}
