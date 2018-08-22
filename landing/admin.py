@@ -14,11 +14,11 @@ class ImageAdmin(admin.ModelAdmin):
     readonly_fields = ('get_large_preview', )
 
     def get_preview(self, obj):
-        return mark_safe(f'<img style="width: 75px" src="{obj.image.url}"/>')
+        return mark_safe('<img style="width: 75px" src="{' + obj.image.url + '}"/>')
     get_preview.short_description = 'превью'
 
     def get_large_preview(self, obj):
-        return mark_safe(f'<img src="{obj.image.url}"/>')
+        return mark_safe('<img src="{' + obj.image.url + '}"/>')
     get_preview.short_description = 'превью'
 
 
@@ -29,7 +29,7 @@ class ImageInline(admin.TabularInline):
     extra = 1
 
     def get_preview(self, obj):
-        return mark_safe(f'<img style="width: 150px" src="{obj.image.image.url}"/>')
+        return mark_safe(f'<img style="width: 150px" src="{' + obj.image.image.url +'}"/>')
     get_preview.short_description = 'превью'
 
 
