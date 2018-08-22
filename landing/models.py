@@ -82,7 +82,7 @@ class Menu(models.Model):
         verbose_name_plural = 'Меню'
 
     def __str__(self):
-        return f'{self.event}: {self.title}'
+        return self.event + ': ' + self.title
 
 
 class MenuItem(models.Model):
@@ -98,4 +98,4 @@ class MenuItem(models.Model):
         verbose_name_plural = 'Товары'
 
     def __str__(self):
-        return f'{self.title} | {self.weight} | {self.price}'
+        return self.title + ' | ' + self.weight + ' | ' + self.price
