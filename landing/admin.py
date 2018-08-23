@@ -29,7 +29,7 @@ class ImageInline(admin.TabularInline):
     extra = 1
 
     def get_preview(self, obj):
-        return mark_safe(f'<img style="width: 150px" src="{' + obj.image.image.url +'}"/>')
+        return mark_safe('<img style="width: 150px" src="{' + obj.image.image.url +'}"/>')
     get_preview.short_description = 'превью'
 
 
