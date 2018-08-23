@@ -101,21 +101,46 @@
         toggleNav();
     });
 
-    $(`.send-form`).submit(function(e) {
+    $('.send-form').submit(function(e) {
         e.preventDefault(); // avoid to execute the actual submit of the form.
 
         var form = $(this);
         var url = form.attr('action');
         var formData = form.serialize();
-        // console.log(form.children(`input[name="name"]`));
 
         $.ajax({
                type: "POST",
                url: url,
                data: formData, // serializes the form's elements.
-               success: function(data)
-               {
-                   console.log(data); // show response from the php script.
+               success: function(data) {
+                    if (data.status === 'FAIL') {
+                        if (form.children('.form__error')[0]) {
+                            form.children('.form__error')[0].innerHTML = 'Проверьте корректность введенные данные!';
+                            return;
+                        }
+                        else if (form.children('.form__error-2')[0]) {
+                            form.children('.form__error-2')[0].innerHTML = 'Проверьте введенные данные!';
+                            return;
+                        }
+                        form.children('.section-2__form-error')[0].innerHTML = 'Укажите верный номер!';
+                    }
+                    else {
+                        if (form.children('.form__error')[0]) {
+                            form.children('.form__error')[0].innerHTML = 'Ваша заявка успешно отправлена!';
+                            $(form.children('.popup__button')[0]).prop( "disabled", true );
+                            $(form.children('.popup__button')[0]).css( "opacity", '0.5' );
+                            return;
+                        }
+                        else if (form.children('.form__error-2')[0]) {
+                            form.children('.form__error-2')[0].innerHTML = 'Заявка успешно отправлена!';
+                            $(form.children('.form__button')[0]).prop( "disabled", true );
+                            $(form.children('.form__button')[0]).css( "opacity", '0.5' );
+                            return;
+                        }
+                        form.children('.section-2__form-error')[0].innerHTML = 'Заявка успешно отправлена!';
+                        $(form.children('.section-2__form-button')[0]).prop( "disabled", true );
+                        $(form.children('.section-2__form-button')[0]).css( "opacity", '0.5' );
+                }
                }
              });
     });

@@ -16,6 +16,44 @@
 </head>
 <body>
 
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+    (function (d, w, c) {
+        (w[c] = w[c] || []).push(function () {
+            try {
+                w.yaCounter49975270 = new Ya.Metrika2({
+                    id: 49975270,
+                    clickmap: true,
+                    trackLinks: true,
+                    accurateTrackBounce: true,
+                    webvisor: true
+                });
+            } catch (e) {
+            }
+        });
+
+        var n = d.getElementsByTagName("script")[0],
+            s = d.createElement("script"),
+            f = function () {
+                n.parentNode.insertBefore(s, n);
+            };
+        s.type = "text/javascript";
+        s.async = true;
+        s.src = "https://mc.yandex.ru/metrika/tag.js";
+        ;
+
+        if (w.opera == "[object Opera]") {
+            d.addEventListener("DOMContentLoaded", f, false);
+        } else {
+            f();
+        }
+    })(document, window, "yandex_metrika_callbacks2");
+</script>
+<noscript>
+    <div><img src="https://mc.yandex.ru/watch/49975270" ; style="position:absolute; left:-9999px;" alt=""/></div>
+</noscript>
+<!-- /Yandex.Metrika counter -->
+
 <header class="header">
     <div class="header-container">
         <a href="#main" class="header-link anchor-link">
@@ -94,16 +132,14 @@
                     <input type="submit" class="section-2__form-button show-popup show-sm" value="Забронировать">
                 </div>
             </div>
-            <form action="/reservations/" class="section-2__form form-mail send-form">
+            <form action="/reservations/" class="section-2__form send-form">
                 <label>
                     <span class="section-2__form-title">Заказ столиков</span>
                     <input class="section-2__form-input phone-mask"
                            autocomplete="off" type="text" name="phone"
                            placeholder="+7 (&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)">
-                    <input type="hidden" name="name" value="">
-                    <input type="hidden" name="guests" value="">
-                    <input type="hidden" name="address" value="">
                 </label>
+                <div class="section-2__form-error">&nbsp;</div>
                 <input type="submit" class="section-2__form-button"
                        value="Забронировать">
             </form>
@@ -111,9 +147,9 @@
     </div>
 </div>
 <div class="section section_menu section-3">
-    <img src="./img/plate-1.jpg" alt=""
+    <img src="{% static 'img/plate-1.jpg' %}" alt=""
          class="section-3__plate section-3__plate_1">
-    <img src="./img/plate-2.jpg" alt=""
+    <img src="{% static 'img/plate-2.jpg' %}" alt=""
          class="section-3__plate section-3__plate_2">
     <div class="container">
         <div class="section-3__nav">
@@ -211,18 +247,19 @@
                             </a>
                         {% endfor %}
                     </div>
-                    <input type="submit" class="section-2__form-button section-2__form-button_2 show-popup show-sm" value="Забронировать">
+                    <input type="submit" class="section-2__form-button section-2__form-button_2 show-popup show-sm"
+                           value="Забронировать">
                 </div>
             </div>
-            <form action="/mail" class="section-2__form form-mail">
+            <form action="/reservations/" class="section-2__form send-form">
                 <label>
                     <span class="section-2__form-title">Заказ столиков</span>
                     <input class="section-2__form-input phone-mask"
-                           autocomplete="off" name="name" type="text"
+                           autocomplete="off" type="text" name="phone"
                            placeholder="+7 (&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)">
                 </label>
-                <input type="submit"
-                       class="section-2__form-button section-2__form-button_2 send-form"
+                <div class="section-2__form-error">&nbsp;</div>
+                <input type="submit" class="section-2__form-button section-2__form-button_2"
                        value="Забронировать">
             </form>
         </div>
@@ -230,9 +267,9 @@
 </div>
 
 <div class="section section_menu section-3 section-3_2">
-    <img src="./img/rings.jpg" alt=""
+    <img src="{% static 'img/rings.jpg' %}" alt=""
          class="section-3__plate section-3__plate_1">
-    <img src="./img/flowers.jpg" alt=""
+    <img src="{% static 'img/flowers.jpg' %}" alt=""
          class="section-3__plate section-3__plate_2">
     <div class="container">
         <div class="section-3__nav">
@@ -334,18 +371,19 @@
                             </a>
                         {% endfor %}
                     </div>
-                    <input type="submit" class="section-2__form-button section-2__form-button_3 show-popup show-sm" value="Забронировать">
+                    <input type="submit" class="section-2__form-button section-2__form-button_3 show-popup show-sm"
+                           value="Забронировать">
                 </div>
             </div>
-            <form action="/mail" class="section-2__form form-mail">
+            <form action="/reservations/" class="section-2__form send-form">
                 <label>
                     <span class="section-2__form-title">Заказ столиков</span>
                     <input class="section-2__form-input phone-mask"
-                           autocomplete="off" name="name" type="text"
+                           autocomplete="off" type="text" name="phone"
                            placeholder="+7 (&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)">
                 </label>
-                <input type="submit"
-                       class="section-2__form-button section-2__form-button_3 send-form"
+                <div class="section-2__form-error">&nbsp;</div>
+                <input type="submit" class="section-2__form-button section-2__form-button_2"
                        value="Забронировать">
             </form>
         </div>
@@ -353,8 +391,8 @@
 </div>
 
 <div class="section section_menu section-3 section-3_3">
-    <!--<img src="./img/ball.jpg" alt="" class="section-3__plate section-3__plate_1">-->
-    <img src="./img/cake.jpg" alt=""
+    <img src="{% static 'img/ball.jpg' %}" alt="" class="section-3__plate section-3__plate_1">
+    <img src="{% static 'img/cake.jpg' %}" alt=""
          class="section-3__plate section-3__plate_2">
     <div class="container">
         <div class="section-3__nav">
@@ -470,7 +508,8 @@
 <div class="form">
     <div class="container">
         <h2 class="title">Ждем Вас в гости</h2>
-        <form action="/mail" class="form__wrapper form-mail">
+
+        <form action="/reservations/" class="form__wrapper send-form">
             <input type="text" class="form__input" autocomplete="off"
                    placeholder="Имя" name="name">
             <input type="text" class="form__input phone-mask"
@@ -478,6 +517,7 @@
                    placeholder="+7 (&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)">
             <input type="submit" class="form__button send-form"
                    value="Забронировать">
+            <div class="form__error-2">&nbsp;</div>
         </form>
     </div>
 </div>
@@ -497,7 +537,7 @@
                        placeholder="+7 (&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)">
             </div>
             <div class="popup__wrapper">
-                <input type="text" class="popup__input"
+                <input type="number" class="popup__input"
                        autocomplete="off"
                        name="guests"
                        placeholder="Кол. гостей">
@@ -512,7 +552,7 @@
                     </label>
                 {% endfor %}
             </div>
-            <div class="form__error">Необходимо заполнить все поля!</div>
+            <div class="form__error">&nbsp;</div>
             <input type="submit" class="popup__button"
                    value="Забронировать">
         </form>

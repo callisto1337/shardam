@@ -14,6 +14,14 @@ p {
     margin: 0;
 }
 
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0;
+}
+
 @mixin xl {
     @media all and (max-width: 1400px) {
         @content;
@@ -369,7 +377,7 @@ $duration: 0.3s;
     &__form {
         width: 315px;
         height: 320px;
-        padding: 72px 50px 40px;
+        padding: 55px 45px;
         box-sizing: border-box;
         background: url("../img/form.svg") no-repeat center;
         background-size: 100% 100%;
@@ -414,6 +422,12 @@ $duration: 0.3s;
             }
         }
 
+        &-error {
+            margin-top: 15px;
+            color: white;
+            font-family: "Oranienbaum", sans-serif;
+        }
+
         &-button {
             color: white;
             background: url("../img/button.png") no-repeat center;
@@ -423,7 +437,7 @@ $duration: 0.3s;
             font-size: 1.5rem;
             line-height: 54px;
             width: 230px;
-            margin-top: 37px;
+            margin-top: 20px;
             cursor: pointer;
             outline: none;
 
@@ -522,8 +536,7 @@ $duration: 0.3s;
     &__plate {
         z-index: -1;
         position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
+        top: 30px;
 
         @include xl {
             display: none;
@@ -1037,7 +1050,7 @@ $duration: 0.3s;
     padding: 100px 15px;
 
     @include sm {
-        padding: 75px 15px;
+        padding: 75px 15px 40px;
     }
 
     .title {
@@ -1046,13 +1059,35 @@ $duration: 0.3s;
 
     &__error {
         text-align: center;
+        margin-top: 35px;
+        color: #626262;
+        font-size: 20px;
+        font-family: "Oranienbaum", serif;
+
+        &:disabled {
+            display: none;
+            opacity: 0.5;
+        }
+    }
+
+    &__error-2 {
+        width: 100%;
         margin-top: 20px;
-        display: none;
+        text-align: center;
+        color: white;
+        font-size: 20px;
+        font-family: "Oranienbaum", sans-serif;
+
+        &:disabled {
+            display: none;
+            opacity: 0.5;
+        }
     }
 
     &__wrapper {
         display: flex;
         justify-content: space-between;
+        flex-wrap: wrap;
         max-width: 879px;
         margin: 70px auto 0;
 
@@ -1285,7 +1320,7 @@ $duration: 0.3s;
         display: block;
         width: 235px;
         height: 57px;
-        margin: 50px auto 0;
+        margin: 30px auto 0;
         color: white;
         font-size: 25px;
         font-family: "Oranienbaum", serif;
