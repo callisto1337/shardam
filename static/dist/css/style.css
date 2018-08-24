@@ -463,7 +463,11 @@ input[type=number]::-webkit-outer-spin-button {
             -ms-flex-direction: column;
                 flex-direction: column; } }
   .section-3__block-col {
-    width: 25%; }
+    width: 33%;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+    margin: 0;
+    padding-left: 30px; }
     @media all and (max-width: 767px) {
       .section-3__block-col {
         width: 100%; }
@@ -471,12 +475,23 @@ input[type=number]::-webkit-outer-spin-button {
           margin-top: 20px; } }
   .section-3__block-title {
     margin-top: 40px;
-    font-size: 50px; }
+    font-size: 56px;
+    color: #b79067;
+    font-family: "Oranienbaum", sans-serif; }
     @media all and (max-width: 767px) {
       .section-3__block-title {
         font-size: 30px; } }
     .section-3__block-title:first-of-type {
       margin-top: 0; }
+  .section-3__block-item {
+    font-size: 18px; }
+    .section-3__block-item + .section-3__block-item {
+      margin-top: 10px; }
+    @media all and (max-width: 767px) {
+      .section-3__block-item {
+        font-size: 16px; }
+        .section-3__block-item + .section-3__block-item {
+          margin-top: 5px; } }
 
 .section-3__nav {
   display: -webkit-box;
@@ -808,7 +823,7 @@ input[type=number]::-webkit-outer-spin-button {
         margin-top: 30px; } }
   .footer__title {
     font-size: 24px;
-    font-family: "Oranienbaum" ,serif;
+    font-family: "Oranienbaum", serif;
     text-transform: uppercase;
     line-height: 32px;
     font-weight: 400;

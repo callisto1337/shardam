@@ -16,7 +16,7 @@
             var indexTab = $(e.target.closest('.section-3__categories')).find('.active').index();
 
             $(e.target.closest('.container')).find($('.section-3__menu.active')).removeClass('active');
-            console.log($(e.target.closest('.container')).find($('.section-3__menu'))[indexTab].classList.add('active'));
+            $(e.target.closest('.container')).find($('.section-3__menu'))[indexTab].classList.add('active');
         }
 
         // Само меню
@@ -27,7 +27,7 @@
             var indexNav = $(e.target.closest('.container')).find('.section-3__nav-item_active').index();
 
             $(e.target.closest('.container')).find($('.section-3__block_active')).removeClass('section-3__block_active');
-            console.log($(e.target.closest('.container')).find($('.section-3__block'))[indexNav].classList.add('section-3__block_active'));
+            $(e.target.closest('.container')).find($('.section-3__block'))[indexNav].classList.add('section-3__block_active');
         }
     });
 
