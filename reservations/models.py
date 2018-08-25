@@ -14,4 +14,4 @@ class Reservation(models.Model):
         verbose_name_plural = 'Бронирования'
 
     def __str__(self):
-        return self.name + ': ' + {self.phone}
+        return self.name + ': ' + self.phone
